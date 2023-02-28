@@ -1,0 +1,152 @@
+<app-banner title="Signup"></app-banner>
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <form [formGroup]="signupForm">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+              placeholder="First Name"
+              required
+            />
+          </div>
+          <div
+            *ngIf="
+              signupForm.controls['firstName'].invalid &&
+              (signupForm.controls['firstName'].touched ||
+                signupForm.controls['firstName'].dirty)
+            "
+          >
+            <div *ngIf="signupForm.controls['firstName'].errors.required">
+              First Name is required
+            </div>
+            <div *ngIf="signupForm.controls['firstName'].errors.minlength">
+              First mast have at least 5 chars
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+              placeholder="Last Name"
+            />
+          </div>
+          <div
+            *ngIf="
+              signupForm.controls['lastName'].invalid &&
+              (signupForm.controls['lastName'].touched ||
+                signupForm.controls['lastName'].dirty)
+            "
+          >
+            <div *ngIf="signupForm.controls['lastName'].errors.required">
+              Last Name is required
+            </div>
+            <div *ngIf="signupForm.controls['lastName'].errors.minlength">
+              lastName mast have at least 5 chars
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="email"
+              placeholder="email"
+            />
+          </div>
+          <div
+            *ngIf="
+              signupForm.controls['email'].invalid &&
+              (signupForm.controls['email'].touched ||
+                signupForm.controls['email'].dirty)
+            "
+          >
+            <div *ngIf="signupForm.controls['email'].errors.required">
+              email is required
+            </div>
+            <div *ngIf="signupForm.controls['email'].errors.email">
+              Format email error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="password"
+              placeholder="password"
+            />
+          </div>
+          <div
+            *ngIf="
+              signupForm.controls['password'].invalid &&
+              (signupForm.controls['password'].touched ||
+                signupForm.controls['password'].dirty)
+            "
+          >
+            <div *ngIf="signupForm.controls['password'].errors.required">
+              password is required
+            </div>
+            <div
+              *ngIf="signupForm.controls['password'].errors.pattern"
+              class="error"
+            >
+              The password should
+              <li>At least one Uppercase character</li>
+              <li>At least one lowerCase character</li>
+              <li>At least one numeric character</li>
+              <li>At least one special character</li>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="ConfirmPassword"
+              placeholder="ConfirmPassword"
+            />
+          </div>
+          <div
+            *ngIf="
+              signupForm.controls['ConfirmPassword'].invalid &&
+              (signupForm.controls['ConfirmPassword'].touched ||
+                signupForm.controls['ConfirmPassword'].dirty)
+            "
+          >
+            <div
+              *ngIf="signupForm.controls['ConfirmPassword'].errors.minlength"
+            >
+              ConfirmPassword > 6
+            </div>
+            <div *ngIf="signupForm.controls['ConfirmPassword'].errors.noMatch">
+              ConfirmPassword error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input
+              type="submit"
+              class="btn btn-primary py-3 px-5"
+              (click)="signup()"
+              value="Signup"
+            />
+          </div>
+        </form>
+        <div
+          class="alert alert-warning"
+          *ngIf="isSignUpFailed"
+        >
+          Signup failed!<br />{{ errorMessage }}
+        </div>
+        <div class="alert alert-success" *ngIf="isSuccessful">
+          Your registration is successful!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
